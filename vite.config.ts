@@ -8,7 +8,8 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         react: 'hono/jsx/dom',
-        'react-dom': 'hono/jsx/dom'
+        'react-dom': 'hono/jsx/dom',
+        'use-sync-external-store/shim/index.js': 'hono/jsx/dom'
       }
     }
   }

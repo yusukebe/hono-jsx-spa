@@ -1,12 +1,14 @@
 import { render } from 'hono/jsx/dom'
+import { hc } from 'hono/client'
 import useSWR from 'swr'
+import { AppType } from '.'
 
 function App() {
-  const fetcher = async (url: string) => {
-    const res = await fetch(url)
-    const data = await res.json<{ name: string }>()
-    console.log(data) // {name: "Hono"}
-    return data
+  const client = hc<AppType>('/')
+
+  const fetcher = async () => {
+    const res = await client.api.$get()
+    return await res.json()
   }
 
   const { data, error, isLoading } = useSWR('/api', fetcher)

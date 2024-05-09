@@ -20,10 +20,12 @@ app.get('/', (c) => {
   )
 })
 
-app.get('/api', (c) => {
+const routes = app.get('/api', (c) => {
   return c.json({
     name: 'Hono'
   })
 })
+
+export type AppType = typeof routes
 
 export default app
