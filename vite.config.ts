@@ -4,8 +4,17 @@ import adapter from '@hono/vite-dev-server/cloudflare'
 import { defineConfig } from 'vite'
 
 export default defineConfig(({ mode }) => {
+  const common = {
+    resolve: {
+      alias: {
+        react: 'hono/jsx/dom',
+        'react-dom': 'hono/jsx/dom'
+      }
+    }
+  }
   if (mode === 'client') {
     return {
+      ...common,
       esbuild: {
         jsxImportSource: 'hono/jsx/dom'
       },
@@ -20,6 +29,7 @@ export default defineConfig(({ mode }) => {
     }
   } else {
     return {
+      ...common,
       plugins: [
         build(),
         devServer({

@@ -20,12 +20,10 @@ app.get('/', (c) => {
   )
 })
 
-const apiRoutes = app.get('/api', (c) => {
+app.get('/api', (c) => {
   return c.json({
     name: 'Hono'
   })
 })
-
-export type ApiType = typeof apiRoutes
 
 export default app

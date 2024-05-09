@@ -1,24 +1,20 @@
 import { render } from 'hono/jsx/dom'
-import { useEffect, useState } from 'hono/jsx'
-import { hc } from 'hono/client'
-import { ApiType } from '.'
+import useSWR from 'swr'
 
 function App() {
-  const [name, setName] = useState('')
-
-  const client = hc<ApiType>('/')
-
-  const fetchApi = async () => {
-    const res = await client.api.$get()
-    const data = await res.json()
-    setName(data.name)
+  const fetcher = async (url: string) => {
+    const res = await fetch(url)
+    const data = await res.json<{ name: string }>()
+    console.log(data) // {name: "Hono"}
+    return data
   }
 
-  useEffect(() => {
-    fetchApi()
-  }, [])
+  const { data, error, isLoading } = useSWR('/api', fetcher)
 
-  return <h1>Hello {name}!!</h1>
+  if (error) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
+
+  return <h1>Hello {data?.name}!</h1>
 }
 
 const domNode = document.getElementById('root')!
