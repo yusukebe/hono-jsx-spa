@@ -20,12 +20,11 @@ app.get('/', (c) => {
   )
 })
 
-const apiRoutes = app.get('/api', (c) => {
+app.post('/api', async (c) => {
+  const { name } = await c.req.parseBody<{ name: string }>()
   return c.json({
-    name: 'Hono'
+    name
   })
 })
-
-export type ApiType = typeof apiRoutes
 
 export default app

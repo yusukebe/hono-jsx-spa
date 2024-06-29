@@ -1,24 +1,27 @@
+import { useState } from 'hono/jsx'
 import { render } from 'hono/jsx/dom'
-import { useEffect, useState } from 'hono/jsx'
-import { hc } from 'hono/client'
-import { ApiType } from '.'
 
 function App() {
-  const [name, setName] = useState('')
+  const [name, setName] = useState('no name')
 
-  const client = hc<ApiType>('/')
-
-  const fetchApi = async () => {
-    const res = await client.api.$get()
-    const data = await res.json()
+  const fetchAction = async (formData: FormData) => {
+    const res = await fetch('/api', {
+      method: 'POST',
+      body: formData
+    })
+    const data = await res.json<{ name: string }>()
     setName(data.name)
   }
 
-  useEffect(() => {
-    fetchApi()
-  }, [])
-
-  return <h1>Hello {name}!!</h1>
+  return (
+    <>
+      <h1>Hello {name}!!</h1>
+      <form action={fetchAction}>
+        <input name="name" />
+        <button type="submit">Send</button>
+      </form>
+    </>
+  )
 }
 
 const domNode = document.getElementById('root')!
