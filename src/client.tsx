@@ -1,14 +1,13 @@
+import { hc } from 'hono/client'
 import { useState } from 'hono/jsx'
 import { render } from 'hono/jsx/dom'
-import { hc } from 'hono/client'
 import type { ApiRoutes } from '.'
 
 const client = hc<ApiRoutes>('/')
 
 function App() {
   const [name, setName] = useState('no name')
-
-  const fetchAction = async (formData: FormData) => {
+  const action = async (formData: FormData) => {
     const res = await client.api.$post({
       form: {
         name: formData.get('name') ?? name
@@ -21,8 +20,8 @@ function App() {
   return (
     <>
       <h1>Hello {name}!!</h1>
-      <form action={fetchAction}>
-        <input name="name" />
+      <form action={action}>
+        <input name="name" autocomplete="off" />
         <button type="submit">Send</button>
       </form>
     </>

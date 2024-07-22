@@ -10,11 +10,9 @@ export default defineConfig(({ mode }) => {
         jsxImportSource: 'hono/jsx/dom'
       },
       build: {
+        manifest: true,
         rollupOptions: {
-          input: './src/client.tsx',
-          output: {
-            entryFileNames: 'static/client.js'
-          }
+          input: './src/client.tsx'
         }
       }
     }

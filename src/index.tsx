@@ -1,25 +1,13 @@
-import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
+import { Hono } from 'hono'
 import { z } from 'zod'
+import { renderer } from './renderer'
 
 const app = new Hono()
+app.use(renderer)
 
 app.get('/', (c) => {
-  return c.html(
-    <html>
-      <head>
-        <link href="/static/style.css" rel="stylesheet" />
-        {import.meta.env.PROD ? (
-          <script type="module" src="/static/client.js"></script>
-        ) : (
-          <script type="module" src="/src/client.tsx"></script>
-        )}
-      </head>
-      <body>
-        <div id="root"></div>
-      </body>
-    </html>
-  )
+  return c.render(<div id="root"></div>)
 })
 
 const schema = z.object({
