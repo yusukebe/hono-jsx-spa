@@ -1,32 +1,21 @@
-import { hc } from 'hono/client'
-import { useState } from 'hono/jsx'
-import { render } from 'hono/jsx/dom'
-import type { ApiRoutes } from '.'
+import { render, use, Suspense } from 'hono/jsx/dom'
 
-const client = hc<ApiRoutes>('/')
+const fetchData = async () => {
+  const data = await fetch('/api')
+  return data.json()
+}
 
-function App() {
-  const [name, setName] = useState('no name')
-  const action = async (formData: FormData) => {
-    const res = await client.api.$post({
-      form: {
-        name: formData.get('name') ?? name
-      }
-    })
-    const data = await res.json()
-    setName(data.name)
-  }
+const Component = ({ promise }: { promise: Promise<{ message: string }> }) => {
+  const data = use(promise)
+  return <h1>{data.message}</h1>
+}
 
+const App = () => {
   return (
-    <>
-      <h1>Hello {name}!!</h1>
-      <form action={action}>
-        <input name="name" autocomplete="off" />
-        <button type="submit">Send</button>
-      </form>
-    </>
+    <Suspense fallback={'loading...'}>
+      <Component promise={fetchData()} />
+    </Suspense>
   )
 }
 
-const domNode = document.getElementById('root')!
-render(<App />, domNode)
+render(<App />, document.getElementById('root')!)

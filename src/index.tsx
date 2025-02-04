@@ -1,24 +1,23 @@
-import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
-import { z } from 'zod'
-import { renderer } from './renderer'
+import { Script } from 'honox/server'
 
 const app = new Hono()
-app.use(renderer)
+
+app.get('/api', (c) => {
+  return c.json({ message: 'Hello from server' })
+})
 
 app.get('/', (c) => {
-  return c.render(<div id="root"></div>)
+  return c.html(
+    <html>
+      <head>
+        <Script src="/src/client.tsx" prod={import.meta.env.PROD} />
+      </head>
+      <body>
+        <div id="root"></div>
+      </body>
+    </html>
+  )
 })
-
-const schema = z.object({
-  name: z.string()
-})
-
-const apiRoutes = app.post('/api', zValidator('form', schema), (c) => {
-  const { name } = c.req.valid('form')
-  return c.json({ name })
-})
-
-export type ApiRoutes = typeof apiRoutes
 
 export default app
