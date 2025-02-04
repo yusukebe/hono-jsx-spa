@@ -1,5 +1,4 @@
 import { Hono } from 'hono'
-import { Script } from 'honox/server'
 
 const app = new Hono()
 
@@ -11,7 +10,7 @@ app.get('/', (c) => {
   return c.html(
     <html>
       <head>
-        <Script src="/src/client.tsx" prod={import.meta.env.PROD} />
+        <script type="module" src={import.meta.env.PROD ? '/assets/client.js' : '/src/client.tsx'}></script>
       </head>
       <body>
         <div id="root"></div>
