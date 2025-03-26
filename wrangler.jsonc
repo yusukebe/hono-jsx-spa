@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hono-jsx-spa",
+  "compatibility_date": "2025-03-20",
+  "main": "./src/index.tsx",
+  "assets": {
+    "directory": "./dist/static"
+  }
+}
