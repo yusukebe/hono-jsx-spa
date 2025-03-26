@@ -10,10 +10,11 @@
     "hono": "^4.5.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250129.0",
+    "@cloudflare/vite-plugin": "^0.1.15",
+    "@cloudflare/workers-types": "^4.20250321.0",
     "@hono/vite-build": "^1.3.0",
-    "@hono/vite-dev-server": "^0.12.1",
     "vite": "^6.0.11",
-    "wrangler": "^3.107.2"
+    "vite-plugin-ssr-hot-reload": "^0.2.2",
+    "wrangler": "^4.4.0"
   }
 }

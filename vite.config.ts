@@ -1,15 +1,15 @@
-import build from '@hono/vite-build/cloudflare-workers'
-import devServer from '@hono/vite-dev-server'
 import { defineConfig } from 'vite'
+import { cloudflare } from '@cloudflare/vite-plugin'
+import ssrHotReload from 'vite-plugin-ssr-hot-reload'
+import build from '@hono/vite-build/cloudflare-workers'
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
   if (mode === 'client') {
     return {
       esbuild: {
         jsxImportSource: 'hono/jsx/dom'
       },
       build: {
-        manifest: true,
         rollupOptions: {
           output: {
             entryFileNames: 'public/assets/client.js'
@@ -19,13 +19,13 @@ export default defineConfig(({ mode }) => {
       }
     }
   } else {
+    if (command === 'build') {
+      return {
+        plugins: [build()]
+      }
+    }
     return {
-      plugins: [
-        build(),
-        devServer({
-          entry: 'src/index.tsx'
-        })
-      ]
+      plugins: [cloudflare(), ssrHotReload()]
     }
   }
 })
