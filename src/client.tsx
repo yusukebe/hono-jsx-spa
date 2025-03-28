@@ -2,7 +2,7 @@ import { render, use, Suspense } from 'hono/jsx/dom'
 
 const fetchData = async () => {
   const data = await fetch('/api')
-  return data.json()
+  return data.json<{ message: string }>()
 }
 
 const Component = ({ promise }: { promise: Promise<{ message: string }> }) => {

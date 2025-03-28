@@ -11,6 +11,7 @@
       "DOM.Iterable"
     ],
     "types": [
+      "./worker-configuration",
       "vite/client"
     ],
     "jsx": "react-jsx",

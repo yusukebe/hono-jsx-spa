@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { env } from 'cloudflare:workers'
 
 const app = new Hono()
 
@@ -10,7 +11,7 @@ app.get('/', (c) => {
   return c.html(
     <html>
       <head>
-        <script type="module" src={import.meta.env.PROD ? '/assets/client.js' : '/src/client.tsx'}></script>
+        <script type="module" src={env.ENVIRONMENT === 'production' ? '/static/client.js' : '/src/client.tsx'}></script>
       </head>
       <body>
         <div id="root"></div>
