@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { cloudflare } from '@cloudflare/vite-plugin'
+import react from '@vitejs/plugin-react'
 import ssrHotReload from 'vite-plugin-ssr-hot-reload'
 
 export default defineConfig(({ mode, command }) => {
@@ -7,14 +8,14 @@ export default defineConfig(({ mode, command }) => {
     if (mode === 'client') {
       return {
         esbuild: {
-          jsxImportSource: 'hono/jsx/dom'
+          exclude: ['react', 'react-dom']
         },
         build: {
           rollupOptions: {
             output: {
               entryFileNames: 'static/client.js'
             },
-            input: './src/client.tsx'
+            input: './src/client/index.tsx'
           }
         }
       }
@@ -23,7 +24,14 @@ export default defineConfig(({ mode, command }) => {
     }
   } else {
     return {
-      plugins: [cloudflare(), ssrHotReload()]
+      plugins: [
+        ssrHotReload({
+          entry: ['./src/server/*'],
+          injectReactRefresh: true
+        }),
+        react(),
+        cloudflare()
+      ]
     }
   }
 })

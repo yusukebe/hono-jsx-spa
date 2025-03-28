@@ -1,4 +1,4 @@
-import { render, use, Suspense } from 'hono/jsx/dom'
+import { use, Suspense } from 'react'
 
 const fetchData = async () => {
   const data = await fetch('/api')
@@ -18,4 +18,4 @@ const App = () => {
   )
 }
 
-render(<App />, document.getElementById('root')!)
+export default App

@@ -7,12 +7,18 @@
     "deploy": "$npm_execpath run build && wrangler deploy -e prod"
   },
   "dependencies": {
-    "hono": "^4.5.1"
+    "@hono/react-renderer": "^0.3.0",
+    "hono": "^4.5.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^0.1.15",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.0.11",
-    "vite-plugin-ssr-hot-reload": "^0.2.2",
+    "vite-plugin-ssr-hot-reload": "^0.4.1",
     "wrangler": "^4.4.0"
   }
 }

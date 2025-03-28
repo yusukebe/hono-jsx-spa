@@ -12,9 +12,9 @@
     ],
     "types": [
       "./worker-configuration",
-      "vite/client"
+      "vite/client",
     ],
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "jsxImportSource": "react"
   },
 }
