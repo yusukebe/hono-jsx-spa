@@ -15,9 +15,11 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "^0.1.19",
     "@hono/vite-build": "^1.5.0",
+    "@tailwindcss/vite": "^4.1.1",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.1.1",
     "vite": "^6.0.11",
     "vite-plugin-ssr-hot-reload": "^0.4.1",
     "wrangler": "^4.6.0"
