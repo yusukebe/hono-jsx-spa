@@ -4,18 +4,6 @@
   "compatibility_date": "2025-03-20",
   "main": "./src/server/index.tsx",
   "assets": {
-    "directory": "dist"
-  },
-  "env": {
-    "dev": {
-      "vars": {
-        "ENVIRONMENT": "dev"
-      }
-    },
-    "prod": {
-      "vars": {
-        "ENVIRONMENT": "production"
-      }
-    }
+    "directory": "dist",
   }
 }
