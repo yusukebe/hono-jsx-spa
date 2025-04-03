@@ -18,7 +18,7 @@ export default defineConfig(({ mode, command }) => {
               entryFileNames: 'static/client.js',
               assetFileNames: 'static/assets/[name].[ext]'
             },
-            input: ['./src/client/index.tsx', './src/style.css']
+            input: ['./src/client/index.tsx', './src/server/style.css']
           }
         },
         plugins: [tailwindcss()]
